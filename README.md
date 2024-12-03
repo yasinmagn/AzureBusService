@@ -34,6 +34,14 @@ This project demonstrates the use of various Azure messaging services, including
 
 #### Topics
 - Similar to queues but with multiple subscriptions, allowing for more complex message distribution scenarios.
+- subscriber are invoked or notified when message of interest apperars
+- **Usage Scenarios**:
+- **Message**
+-  logging ensures that all messages sent through the bus are tracked and stored, which is essential for debugging, auditing, and monitoring purposes.
+-Implementation:
+You can implement message logging by creating a separate subscription specifically for logging. This subscription will receive copies of all messages sent to the topic.
+-Fan-Out: Distributes a single message to multiple subscribers for parallel processing.
+-Fan-In: Aggregates messages from multiple sources into a single service for combined processing.
 
 ## Sample POST Body for Order Creation
 
@@ -51,4 +59,4 @@ This project demonstrates the use of various Azure messaging services, including
 
 ---
 
-You can copy and paste this message directly into your README file. If you need further customization or have any questions, feel free to ask!
+
