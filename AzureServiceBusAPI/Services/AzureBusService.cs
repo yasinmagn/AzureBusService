@@ -31,13 +31,26 @@ namespace AzureServiceBusAPI.Services
             await _sender.SendMessageAsync(busMessage);
         }
 
-        public async Task ReceiveMessagesAsync()
+        public async Task<string> ReceiveMessagesAsync()
         {
-            _processor.ProcessMessageAsync += MessageHandler;
-            _processor.ProcessErrorAsync += ErrorHandler;
-
+            string receivedMessage = string.Empty;
+            _processor.ProcessMessageAsync += async args =>
+            {
+                string body = args.Message.Body.ToString();
+                Console.WriteLine($"Received: {body}");
+                receivedMessage = body;
+                await args.CompleteMessageAsync(args.Message);
+            };
+            _processor.ProcessErrorAsync += args =>
+            {
+                Console.WriteLine($"Message handler encountered an exception: {args.Exception}");
+                return Task.CompletedTask;
+            };
             await _processor.StartProcessingAsync();
+            await Task.Delay(500);
+            await _processor.StopProcessingAsync(); return receivedMessage;
         }
+
 
         private async Task MessageHandler(ProcessMessageEventArgs args)
         {
