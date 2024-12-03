@@ -16,5 +16,16 @@ Azure service bus Messaging services:
    * A receiver picks the message in front of the queue.
    * You can add/remove reciever instances as your queue length changes to the demand and workload
   
-    ![image](https://github.com/user-attachments/assets/4d536198-3b1a-4880-a557-3e271ca57475)
+    Post Body :
+
+   {
+  "orderId": 0,
+  "customerName": "John Doe",
+  "tyreBrand": "Michelin",
+  "tyreModel": "Pilot Sport 4",
+  "quantity": 4,
+  "orderDate": "2024-12-03T16:16:37.684Z",
+  "status": "Pending"
+}
+
 
